@@ -1,0 +1,182 @@
+@import "tailwindcss";
+@plugin "tailwindcss-react-aria-components";
+
+@custom-variant o (&:not([o]));
+@custom-variant dark (&:is(.dark *));
+
+
+ :root {
+    /**
+    https://www.fluid-type-scale.com/calculate?minFontSize=16&minWidth=400&minRatio=1.2&maxFontSize=16&maxWidth=1280&maxRatio=1.3&steps=sm%2Cbase%2Ch4%2Ch3%2Ch2%2Ch1%2Ch1xl&baseStep=base&prefix=font-size&decimals=2&useRems=on&remValue=16&previewFont=Inter
+    **/
+    /** Default typography style **/
+    --font-size-sm: clamp(0.83rem, -0.12vw + 0.86rem, 0.77rem);
+    --font-size-base: 1rem;
+    --font-size-h4: clamp(1.2rem, 0.18vw + 1.15rem, 1.3rem);
+    --font-size-h3: clamp(1.44rem, 0.45vw + 1.33rem, 1.69rem);
+    --font-size-h2: clamp(1.73rem, 0.85vw + 1.51rem, 2.2rem);
+    --font-size-h1: clamp(2.07rem, 1.42vw + 1.72rem, 2.86rem);
+    --font-size-h1xl: clamp(2.49rem, 2.23vw + 1.93rem, 3.71rem);
+
+    /** line height **/
+    --line-height-sm: 1.25;
+    --line-height-base: 1.5;
+    --line-height-lg: 1.75;
+    --line-height-xl: 2;
+
+    --heading-space-xs: clamp(0.35rem, calc(0.35rem + 0vw), 0.35rem);
+    --heading-space-s: clamp(0.7rem, calc(0.7rem + 0vw), 0.7rem);
+    --heading-space-m: clamp(1rem, calc(1rem + 0vw), 1rem);
+
+    /** Default theme colors, can be override by higher specificity **/
+    
+  }
+
+
+
+  @theme inline{
+  --color-primary: oklch(0.47 0.12 125.49);
+  --color-on-primary: oklch(1 0 0);
+  --color-secondary: oklch(0.443 0.067 100.28);
+  --color-on-secondary: oklch(1 0 0);
+  --color-tertiary: oklch(0.443 0.093 175.33);
+  --color-on-tertiary: oklch(1 0 0);
+  --color-error: oklch(0.530 0.206 25.76);
+  --color-on-error: oklch(1 0 0);
+  --color-surface: oklch(0.973 0.030 100.26);
+  --color-on-surface: oklch(0.164 0.017 88.73);
+  --color-surface-variant: oklch(0.891 0.041 100.03);
+  --color-on-surface-variant: oklch(0.328 0.034 100.36);
+  --color-outline: oklch(0.512 0.031 100.18);
+  --color-outline-variant: oklch(0.784 0.037 100.06);
+
+  --color-primary-container: oklch(0.9 0.227772 125.7042);
+  --color-on-primary-container: oklch(0.133 0.077 127.45);
+  --color-secondary-container: oklch(0.902 0.080 100.89);
+  --color-on-secondary-container: oklch(0.128 0.068 101.38);
+  --color-tertiary-container: oklch(0.900 0.076 175.98);
+  --color-on-tertiary-container: oklch(0.122 0.081 174.83);
+  --color-error-container: oklch(0.900 0.074 25.66);
+  --color-on-error-container: oklch(0.284 0.115 25.50);
+
+  /** Background color **/
+  --color-background: oklch(1 0 0);
+}
+
+
+@layer base {
+ 
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-background);
+  }
+
+  body {
+    color: var(--color-on-surface);
+    line-height: var(--line-height-lg);
+  }
+
+  /** Fluid headings. See: https://fluid-type-scale.com **/
+  h1,
+  .h1 {
+    font-size: var(--font-size-h1);
+    font-weight: 800;
+  }
+
+  h2,
+  .h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 700;
+  }
+
+  h3,
+  .h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  h4,
+  .h4 {
+    font-size: var(--font-size-h4);
+  }
+
+  h5,
+  h6,
+  .h5,
+  .h6 {
+    font-size: var(--font-size-base);
+  }
+
+  h1,
+  h2,
+  .h1,
+  .h2 {
+    line-height: var(--line-height-sm);
+  }
+
+  h3,
+  h4,
+  h5,
+  h6,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    font-weight: 500;
+    line-height: var(--line-height-base);
+  }
+
+  h1,
+  .h1 {
+    margin-bottom: var(--heading-space-s);
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    margin-bottom: var(--heading-space-xs);
+  }
+
+  /** Chaning default focus outline for all when tabbing */
+  /** Make sure to style all focus-visible selector for each element, if you want to change default outline. **/
+  /** supporting react-aria. Also make sure to set outline:none to each element to disable default outline. **/
+  /** don't add here .outline-none:focus-visible, otherwise outline will still be visible when doing focus via keyboard and then clicking via mouse for react-aria. **/
+  *:focus-visible,
+  [data-focus-visible='true']:focus-visible {
+    outline: 1.5px solid theme('colors.blue.500');
+    outline-offset: 1px;
+  }
+
+  /* 
+    Suppress the focus ring for elements that cannot be accessed via keyboard.
+  */
+  :focus:not(focus-visible) {
+    outline: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  .tabler-icon {
+    stroke-width: 1.5;
+  }
+  
+}
+
+/* Hide scrollbar for WebKit browsers and standard browsers */
+@utility scrollbar-hidden {
+  /* For WebKit browsers (Chrome, Safari, etc.) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* For Firefox */
+  scrollbar-width: none;
+}
