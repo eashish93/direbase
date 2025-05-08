@@ -42,6 +42,8 @@ FIREBASE_SERVICE_ACCOUNT_JSON='{
 ```
 The application should now be running on `http://localhost:3000`.
 
+5. __To access admin panel__
+Go to `/admin` route where you can access admin backend.  If you've not setup owner, then it will redirect to `/setup` page automatically. Once done, you can login it via `/login` route.
 
 
 ### Deploying to production
@@ -80,3 +82,6 @@ Images are served directly via Cloudflare's image transformation service. For mo
 ```bash
   pnpm run deploy
 ```
+
+6. __To access admin panel__
+Go to `/admin` route where you can access admin backend.  If you've not setup owner, then it will redirect to `/setup` page automatically. Once done, you can login it via `/login` route.
